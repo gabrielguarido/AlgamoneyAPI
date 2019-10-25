@@ -62,7 +62,7 @@ public class AlgamoneyExceptionHandler extends ResponseEntityExceptionHandler {
 			WebRequest request) {
 		String mensagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null,
 				LocaleContextHolder.getLocale());
-		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);s
+		String mensagemDesenvolvedor = ExceptionUtils.getRootCauseMessage(ex);
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
