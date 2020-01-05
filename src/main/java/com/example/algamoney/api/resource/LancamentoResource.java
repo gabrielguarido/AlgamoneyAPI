@@ -31,6 +31,7 @@ import com.example.algamoney.api.exceptionhandler.AlgamoneyExceptionHandler.Erro
 import com.example.algamoney.api.model.Lancamento;
 import com.example.algamoney.api.repository.LancamentoRepository;
 import com.example.algamoney.api.repository.filter.LancamentoFilter;
+import com.example.algamoney.api.repository.projection.ResumoLancamento;
 import com.example.algamoney.api.service.LancamentoService;
 import com.example.algamoney.api.service.exception.PessoaInexistenteOuInativaException;
 
@@ -50,6 +51,24 @@ public class LancamentoResource {
 	@Autowired
 	private MessageSource messageSource;
 
+	@GetMapping
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
+	}
+
+	@GetMapping(params = "resumo")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+		return lancamentoRepository.resumir(lancamentoFilter, pageable);
+	}
+
+	@GetMapping("/{codigo}")
+	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+	public Lancamento buscarPeloCodigo(@PathVariable Long codigo) {
+		return lancamentoRepository.findOne(codigo);
+	}
+
 	@PostMapping
 	@PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO') and #oauth2.hasScope('write')")
 	public ResponseEntity<Lancamento> criar(@Valid @RequestBody Lancamento lancamento, HttpServletResponse response) {
@@ -58,18 +77,6 @@ public class LancamentoResource {
 		publisher.publishEvent(new RecursoCriadoEvent(this, response, lancamentoSalvo.getCodigo()));
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(lancamentoSalvo);
-	}
-
-	@GetMapping
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
-	public Page<Lancamento> pesquisar(LancamentoFilter lancamentoFilter, Pageable pageable) {
-		return lancamentoRepository.filtrar(lancamentoFilter, pageable);
-	}
-
-	@GetMapping("/{codigo}")
-	@PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
-	public Lancamento buscarPeloCodigo(@PathVariable Long codigo) {
-		return lancamentoRepository.findOne(codigo);
 	}
 
 	@DeleteMapping("/{codigo}")
