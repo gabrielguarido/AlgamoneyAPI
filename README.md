@@ -11,7 +11,7 @@ The application is running in Heroku's cloud environment and it requires full au
 * JDK 8
 * MySQL Database
 * Spring Framework
-* JWT OAuth2 Autehntication
+* JWT OAuth2 Authentication
 * REST
 * Cloud Deploy
 
@@ -26,7 +26,7 @@ The application is running in Heroku's cloud environment and it requires full au
 3. LOG 4J
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Developers
 1. Gabriel Guarido
