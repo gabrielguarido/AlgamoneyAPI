@@ -6,7 +6,7 @@
 Backend module of the project, here you will find all the bases for the Spring Boot API.
 
 ## Application Server
-The application is running in Heroku's cloud environment and it requires full authentication, via JWT (Json Web Token - OAuth 2), to be accessed.
+The application is running in [Heroku's cloud environment](https://algaworks-api.herokuapp.com/) and it requires full authentication, via JWT (Json Web Token - OAuth 2), to be accessed.
 
 ## :computer: Technologies
 * Java 8
