@@ -24,9 +24,9 @@ The application is up and running in [Heroku's Cloud Environment](https://algawo
 |Oct 25 2019 |Jan 5 2020     |2.1.0      |
 
 ## :new: Upcoming improvements
-1. Swagger 2 documentation
-2. JUnit tests
-3. LOG 4J
+- [ ] Swagger 2 documentation
+- [ ] JUnit tests
+- [ ] LOG 4J
 
 ## :alien: Developers
 1. Gabriel Guarido
